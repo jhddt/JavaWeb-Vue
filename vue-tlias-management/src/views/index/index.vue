@@ -312,88 +312,319 @@ function initStudentDegreeChart(degreeDataList) {
 </template>
 
 <style scoped>
+/* 主容器样式 */
 .dashboard-container {
-  padding: 20px;
-  background-color: #f0f2f5;
+  padding: 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 0.01%, #f5f7fa 0.02%, #f5f7fa 100%);
   min-height: 100vh;
+  animation: fadeIn 0.6s ease;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 页面标题样式 */
 .page-title {
-  margin-bottom: 20px;
+  margin-bottom: 32px;
+  text-align: center;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
 }
 
 .page-title h2 {
-  color: #303133;
-  font-size: 24px;
-  font-weight: 500;
+  color: #2c3e50;
+  font-size: 32px;
+  font-weight: 700;
   margin: 0;
+  letter-spacing: -0.5px;
 }
 
+/* 卡片样式 */
 .card {
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  margin-bottom: 24px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
 }
 
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #667eea, #764ba2);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* 卡片标题样式 */
 .card-title {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
-  font-size: 18px;
-  color: #303133;
-  font-weight: 500;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #2c3e50;
+  font-weight: 600;
+  padding-left: 12px;
+}
+
+.card-title .el-icon {
+  font-size: 22px;
+  color: #667eea;
 }
 
 .card-title span {
-  margin-left: 8px;
+  margin-left: 10px;
+  position: relative;
 }
 
+.card-title span::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #667eea;
+  transition: width 0.3s ease;
+}
+
+.card:hover .card-title span::after {
+  width: 100%;
+}
+
+/* 图表容器样式 */
 .chart-container {
   display: flex;
-  gap: 20px;
-  height: 400px;
+  gap: 24px;
+  height: 420px;
+  animation: slideUp 0.5s ease 0.2s both;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .chart-item {
   flex: 1;
   height: 100%;
+  background: #fafbfc;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
+.chart-item:hover {
+  background: white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 日志表格容器样式 */
 .log-container {
   width: 100%;
-  overflow-x: auto;
-  overflow-y: auto;
+  animation: slideUp 0.5s ease 0.3s both;
 }
 
-/* 确保表格内容不换行，强制显示横向滚动条 */
-.log-container .el-table__body-wrapper {
+/* 表格样式增强 */
+.el-table {
+  border-radius: 8px;
+  overflow: hidden;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.el-table:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+.el-table__header-wrapper th {
+  background: #f8fafc !important;
+  font-weight: 600 !important;
+  color: #2c3e50 !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+}
+
+.el-table__body-wrapper {
   overflow-x: auto !important;
 }
 
-/* 调整列宽，确保请求参数列有足够空间 */
-.log-container .el-table__column--min-width-150 {
-  min-width: 150px !important;
-  white-space: nowrap;
+.el-table__row {
+  transition: all 0.2s ease;
 }
 
+.el-table__row:hover > td {
+  background: #f0f9ff !important;
+}
+
+.el-table__row.current-row > td {
+  background: #e6f7ff !important;
+}
+
+/* 表格列样式 */
+.el-table-column {
+  transition: all 0.3s ease;
+}
+
+/* 分页样式 */
 .pagination {
-  margin-top: 15px;
+  margin-top: 20px;
   display: flex;
   justify-content: flex-end;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* 响应式布局 */
+/* 按钮悬停效果 */
+.el-button {
+  transition: all 0.3s ease;
+}
+
+.el-button:hover {
+  transform: translateY(-1px);
+}
+
+/* 弹出层样式增强 */
+.el-popover {
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  border: none;
+}
+
+/* 响应式设计 */
 @media (max-width: 1200px) {
+  .dashboard-container {
+    padding: 16px;
+  }
+  
+  .page-title {
+    margin-bottom: 24px;
+  }
+  
+  .page-title h2 {
+    font-size: 28px;
+  }
+  
+  .card {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
   .chart-container {
     flex-direction: column;
     height: auto;
+    gap: 20px;
+  }
+  
+  .chart-item {
+    height: 350px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title h2 {
+    font-size: 24px;
+  }
+  
+  .card {
+    padding: 16px;
+  }
+  
+  .card-title {
+    font-size: 18px;
   }
   
   .chart-item {
     height: 300px;
-    margin-bottom: 20px;
   }
+  
+  .el-table {
+    font-size: 13px;
+  }
+}
+
+/* 加载状态样式 */
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  color: #909399;
+}
+
+/* 空状态样式 */
+.empty-data {
+  text-align: center;
+  padding: 60px 20px;
+  color: #909399;
+}
+
+.empty-data .el-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+/* 滚动条美化 */
+.log-container::-webkit-scrollbar,
+.el-table__body-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.log-container::-webkit-scrollbar-track,
+.el-table__body-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.log-container::-webkit-scrollbar-thumb,
+.el-table__body-wrapper::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.log-container::-webkit-scrollbar-thumb:hover,
+.el-table__body-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
 </style>

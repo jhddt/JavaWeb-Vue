@@ -34,7 +34,7 @@ const logout = () => {
     <el-container>
       <!-- Header 区域 -->
       <el-header class="header">
-        <span class="title">Tlias智能学习辅助系统</span>
+        <span class="title">智教云</span>
         <span class="right_tool">
           <a href="">
             <el-icon><EditPen /></el-icon> 修改密码 &nbsp;&nbsp;&nbsp; |  &nbsp;&nbsp;&nbsp;
@@ -109,31 +109,165 @@ const logout = () => {
 </template>
 
 <style scoped>
+.common-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部导航栏样式 */
 .header {
-  background-image: linear-gradient(to right, #00547d, #007fa4, #00aaa0, #00d072, #a8eb12);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
 }
 
 .title {
   color: white;
-  font-size: 40px;
-  font-family: 楷体;
-  line-height: 60px;
-  font-weight: bolder;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.right_tool{
-  float: right;
-  line-height: 60px;
+.title::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background: url(../../assets/logo.png) no-repeat center;
+  background-size: contain;
 }
 
-a {
+/* 右侧工具栏 */
+.right_tool {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: white;
+}
+
+.right_tool a {
   color: white;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
+.right_tool a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.right_tool .el-icon {
+  font-size: 16px;
+}
+
+/* 主体容器 */
+.el-container {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - 64px);
+}
+
+/* 侧边栏样式 */
 .aside {
   width: 220px;
-  border-right: 1px solid #ccc;
-  height: 730px;
+  background: white;
+  border-right: 1px solid #e4e7ed;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 菜单样式增强 */
+.el-menu {
+  border-right: none;
+  height: 100%;
+  background: transparent;
+}
+
+.el-menu-item,
+.el-sub-menu__title {
+  height: 50px;
+  line-height: 50px;
+  padding: 0 24px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  border-radius: 0 25px 25px 0;
+  margin: 4px 0;
+}
+
+.el-menu-item:hover,
+.el-sub-menu__title:hover {
+  background: #f0f9ff;
+  color: #409eff;
+}
+
+.el-menu-item.is-active {
+  background: linear-gradient(90deg, #e6f7ff 0%, #f0f9ff 100%);
+  color: #409eff;
+  font-weight: 500;
+  border-right: 3px solid #409eff;
+}
+
+.el-menu-item .el-icon,
+.el-sub-menu__title .el-icon {
+  font-size: 18px;
+  margin-right: 12px;
+}
+
+.el-sub-menu .el-menu {
+  background: white;
+}
+
+.el-sub-menu .el-menu-item {
+  padding-left: 56px;
+  border-radius: 0;
+}
+
+/* 主内容区域 */
+.el-main {
+  padding: 24px;
+  background: #f5f7fa;
+  overflow-y: auto;
+}
+
+/* 响应式适配 */
+@media (max-width: 1200px) {
+  .aside {
+    width: 200px;
+  }
+  
+  .title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .aside {
+    position: fixed;
+    left: -220px;
+    z-index: 99;
+  }
+  
+  .aside.show {
+    left: 0;
+  }
+  
+  .el-main {
+    padding: 16px;
+  }
 }
 </style>

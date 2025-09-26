@@ -33,7 +33,7 @@ const cancel = () => {
   <div id="container">
     <div class="login-form">
       <el-form label-width="80px">
-        <p class="title">智能学习辅助系统</p>
+        <p class="title">智教云</p>
         <el-form-item label="用户名" prop="username">
           <el-input v-model="loginForm.username" placeholder="请输入用户名"></el-input>
         </el-form-item>

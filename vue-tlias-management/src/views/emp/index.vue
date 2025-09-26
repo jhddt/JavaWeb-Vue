@@ -298,50 +298,51 @@ const deleteByIds = async () => {
 </script>
 
 <template>
-  <h1>员工管理</h1> <br>
-  <el-form :inline="true" :model="searchEmp">
-    <el-form-item label="姓名">
-      <el-input v-model="searchEmp.name" placeholder="请输入员工姓名"></el-input>
-    </el-form-item>
+  <div class="page-container">
+    <h1>员工管理</h1> <br>
+    <el-form :inline="true" :model="searchEmp">
+      <el-form-item label="姓名">
+        <el-input v-model="searchEmp.name" placeholder="请输入员工姓名"></el-input>
+      </el-form-item>
 
-    <el-form-item label="性别">
-      <el-select v-model="searchEmp.gender" placeholder="请选择">
-        <el-option label="男" value="1"></el-option>
-        <el-option label="女" value="2"></el-option>
-      </el-select>
-    </el-form-item>
+      <el-form-item label="性别">
+        <el-select v-model="searchEmp.gender" placeholder="请选择">
+          <el-option label="男" value="1"></el-option>
+          <el-option label="女" value="2"></el-option>
+        </el-select>
+      </el-form-item>
 
-    <el-form-item label="入职日期">
-      <el-date-picker
-        v-model="searchEmp.date"
-        type="daterange"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        value-format="YYYY-MM-DD"
-      ></el-date-picker>
-    </el-form-item>
+      <el-form-item label="入职日期">
+        <el-date-picker
+          v-model="searchEmp.date"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          value-format="YYYY-MM-DD"
+        ></el-date-picker>
+      </el-form-item>
 
-    <el-form-item>
-      <el-button type="primary" @click="handleSearch">查询</el-button>
-      <el-button @click="handleReset">清空</el-button>
-    </el-form-item>
-  </el-form>
+      <el-form-item>
+        <el-button type="primary" @click="handleSearch">查询</el-button>
+        <el-button @click="handleReset">清空</el-button>
+      </el-form-item>
+    </el-form>
 
 
-  <el-button type="primary" @click="addEmp"> + 新增员工</el-button>
-  <el-button type="danger" @click="deleteByIds"> - 批量删除</el-button>
-  <br><br>
+    <el-button type="primary" @click="addEmp"> + 新增员工</el-button>
+    <el-button type="danger" @click="deleteByIds"> - 批量删除</el-button>
+    <br><br>
 
-  <!-- 表格 -->
-  <el-table :data="empList" border style="width: 100%" @selection-change="handleSelectionChange">
-    <el-table-column type="selection" width="55" align="center"></el-table-column>
-    <el-table-column prop="name" label="姓名" width="120" align="center"></el-table-column>
-    <el-table-column label="性别" width="80" align="center">
-      <template #default="scope" >
-        {{ scope.row.gender == 1 ? '男' : '女' }}
-      </template>
-    </el-table-column>
+    <!-- 表格 -->
+    <el-table :data="empList" border style="width: 100%" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55" align="center"></el-table-column>
+      <el-table-column prop="name" label="姓名" width="120" align="center"></el-table-column>
+      <el-table-column label="性别" width="80" align="center">
+        <template #default="scope" >
+          {{ scope.row.gender == 1 ? '男' : '女' }}
+        </template>
+      </el-table-column>
     <el-table-column label="头像" width="170" align="center">
       <template #default="scope" >
         <img :src="scope.row.image" alt="Avatar" class="avatar" />
@@ -510,29 +511,162 @@ const deleteByIds = async () => {
         </span>
       </template>
     </el-dialog>
-
+    
+  </div>
 </template>
 
 <style scoped>
+/* 页面整体布局 */
+.page-container {
+  min-height: 100%;
+  background-color: #f5f7fa;
+  padding: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 标题样式 */
+h1 {
+  color: #409eff;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e6f7ff;
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, #409eff, #67c23a);
+}
+
+/* 搜索表单样式 */
+.el-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+}
+
+.el-form-item {
+  margin-bottom: 16px;
+}
+
+.el-form-item__label {
+  font-weight: 500;
+  color: #606266;
+}
+
+/* 按钮样式 */
+.el-button {
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+}
+
+.el-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(64, 158, 255, 0.2);
+}
+
+.el-button + .el-button {
+  margin-left: 10px;
+}
+
+/* 表格样式 */
+.el-table {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.06);
+}
+
+.el-table thead {
+  background-color: #f8f9fa;
+}
+
+.el-table th {
+  font-weight: 600;
+  color: #606266;
+  background-color: #f8f9fa !important;
+  border-bottom: 1px solid #e4e7ed !important;
+}
+
+.el-table td {
+  color: #303133;
+  border-bottom: 1px solid #ebeef5 !important;
+}
+
+.el-table tr:hover > td {
+  background-color: #f5f7fa !important;
+}
+
+.el-table__body-wrapper {
+  overflow-x: auto !important;
+  overflow-y: auto;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-thumb {
+  background-color: #dcdfe6;
+  border-radius: 3px;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-track {
+  background-color: #f0f2f5;
+}
+
+/* 头像样式 */
 .avatar {
   height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e6f7ff;
+  transition: transform 0.3s ease;
 }
+
+.avatar:hover {
+  transform: scale(1.1);
+}
+
+.avatar-uploader {
+  display: inline-block;
+  position: relative;
+}
+
 .avatar-uploader .avatar {
   width: 78px;
   height: 78px;
   display: block;
+  border-radius: 6px;
+  border: 1px solid #dcdfe6;
 }
+
 .avatar-uploader .el-upload {
-  border: 1px dashed var(--el-border-color);
+  border: 1px dashed #dcdfe6;
   border-radius: 6px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: var(--el-transition-duration-fast);
+  transition: all 0.3s ease;
 }
 
 .avatar-uploader .el-upload:hover {
-  border-color: var(--el-color-primary);
+  border-color: #409eff;
+  background-color: #f0f9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(64, 158, 255, 0.15);
 }
 
 .el-icon.avatar-uploader-icon {
@@ -541,7 +675,131 @@ const deleteByIds = async () => {
   width: 78px;
   height: 78px;
   text-align: center;
-  /* 添加灰色的虚线边框 */
-  border: 1px dashed var(--el-border-color);
+  line-height: 78px;
+  border: 1px dashed #dcdfe6;
+  border-radius: 6px;
+}
+
+/* 分页样式 */
+.el-pagination {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled):hover {
+  color: #409eff;
+  background-color: #ecf5ff;
+}
+
+.el-pagination.is-background .el-pager li.is-active {
+  background-color: #409eff;
+  color: white;
+}
+
+/* 对话框样式 */
+.el-dialog {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.el-dialog__header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 16px 20px;
+}
+
+.el-dialog__title {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.el-dialog__body {
+  padding: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.el-dialog__footer {
+  padding: 16px 20px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+/* 表单样式增强 */
+.el-input,
+.el-select,
+.el-date-picker {
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.el-input:hover,
+.el-select:hover,
+.el-date-picker:hover {
+  border-color: #c6e2ff;
+}
+
+.el-input:focus-within,
+.el-select:focus-within,
+.el-date-picker:focus-within {
+  border-color: #409eff;
+  box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
+}
+
+/* 工作经历样式 */
+.expr-item {
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  border-left: 3px solid #409eff;
+  transition: all 0.3s ease;
+}
+
+.expr-item:hover {
+  background-color: #ecf5ff;
+  transform: translateX(4px);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 10px;
+  }
+  
+  h1 {
+    font-size: 20px;
+  }
+  
+  .el-form {
+    padding: 15px;
+  }
+  
+  .el-table {
+    font-size: 13px;
+  }
+  
+  .el-dialog {
+    width: 90% !important;
+    margin: 5vh auto !important;
+  }
+  
+  .el-form-item {
+    margin-bottom: 12px;
+  }
 }
 </style>
