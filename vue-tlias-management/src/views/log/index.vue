@@ -83,61 +83,90 @@ const queryPage = async () => {
 
 
 <style scoped>
-/* 页面整体布局 */
+/* iOS 26 风格页面整体布局 - 增强版 */
 .page-container {
   min-height: 100%;
-  background-color: #f5f7fa;
-  padding: 20px;
+  background-color: #f5f5f7;
+  padding: 24px;
   animation: fadeIn 0.5s ease-in-out;
+  position: relative;
+  overflow: hidden;
 }
 
-/* 标题样式 */
+/* 背景图案 - 微妙的装饰效果 */
+.page-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 20% 20%, rgba(0, 122, 255, 0.03) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(52, 199, 89, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* iOS 26 风格标题样式 - 增强版 */
 h1 {
-  color: #409eff;
-  font-size: 24px;
+  color: #1c1c1e;
+  font-size: 28px;
   font-weight: 600;
   margin-bottom: 24px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e6f7ff;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e5ea;
   position: relative;
 }
 
 h1::after {
   content: '';
   position: absolute;
+  bottom: -1px;
   left: 0;
-  bottom: -2px;
-  width: 80px;
-  height: 2px;
-  background: linear-gradient(90deg, #409eff, #67c23a);
+  width: 60px;
+  height: 3px;
+  background-color: #007aff;
+  border-radius: 1.5px;
 }
 
-/* 表格样式 */
+/* iOS 26 风格表格样式 - 增强版 */
 .el-table {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e5ea;
+  transition: box-shadow 0.3s ease;
+}
+
+.el-table:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
 }
 
 .el-table thead {
-  background-color: #f8fafc;
+  background-color: #f2f2f7;
 }
 
 .el-table th {
   font-weight: 600;
-  color: #606266;
-  background-color: #f8fafc !important;
-  border-bottom: 1px solid #e4e7ed !important;
+  color: #8e8e93;
+  background-color: #f2f2f7 !important;
+  border-bottom: 1px solid #e5e5ea !important;
+  height: 52px;
+  font-size: 14px;
+  padding: 0 16px;
 }
 
 .el-table td {
-  color: #303133;
-  border-bottom: 1px solid #ebeef5 !important;
+  color: #1c1c1e;
+  border-bottom: 1px solid #f2f2f7 !important;
+  height: 56px;
+  padding: 0 16px;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 .el-table tr:hover > td {
-  background-color: #f5f7fa !important;
+  background-color: #f9f9fc !important;
 }
 
 .el-table__body-wrapper {
@@ -145,17 +174,45 @@ h1::after {
   overflow-y: auto;
 }
 
-/* 分页样式 */
-.pagination-container {
-  background-color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+/* 表格内容居中对齐 */
+.el-table .cell {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  word-break: break-word;
 }
 
-/* 动画效果 */
+/* iOS 26 风格分页样式 - 增强版 */
+.pagination-container {
+  margin-top: 20px;
+  text-align: right;
+  padding: 16px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e5ea;
+}
+
+.el-pagination.is-background .el-pager li {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled):hover {
+  color: #007aff;
+  background-color: #f2f2f7;
+  transform: translateY(-1px);
+}
+
+.el-pagination.is-background .el-pager li.is-active {
+  background-color: #007aff;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+}
+
+/* iOS 26 风格动画效果 */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -167,70 +224,98 @@ h1::after {
   }
 }
 
-/* 响应式适配 */
+/* 响应式适配 - 桌面端优先 */
 @media (max-width: 1200px) {
+  .page-container {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  .el-table th, .el-table td {
+    font-size: 13px;
+  }
+}
+
+/* 简化移动端适配 */
+@media (max-width: 768px) {
   .page-container {
     padding: 16px;
   }
   
   h1 {
     font-size: 22px;
-  }
-  
-  .el-table {
-    font-size: 13px;
-  }
-  
-  .el-table__header-wrapper th {
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 768px) {
-  .page-container {
-    padding: 10px;
-  }
-  
-  h1 {
-    font-size: 20px;
+    margin-bottom: 16px;
   }
   
   .el-table {
     font-size: 12px;
+    border-radius: 12px;
   }
   
   .el-table__body-wrapper {
     overflow-x: auto !important;
   }
+  
+  .pagination-container {
+    padding: 12px 16px;
+    border-radius: 12px;
+  }
 }
 
-/* 滚动条美化 */
+/* 优化滚动条样式 */
 .el-table__body-wrapper::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 .el-table__body-wrapper::-webkit-scrollbar-thumb {
-  background-color: #dcdfe6;
-  border-radius: 3px;
+  background-color: #c7c7cc;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.el-table__body-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #8e8e93;
 }
 
 .el-table__body-wrapper::-webkit-scrollbar-track {
-  background-color: #f0f2f5;
-}
-
-/* 标签样式 */
-.el-tag {
+  background-color: #f2f2f7;
   border-radius: 4px;
-  padding: 2px 8px;
-  font-size: 12px;
-  transition: all 0.3s ease;
 }
 
-/* 弹窗样式 */
+/* iOS 26 风格标签样式 */
+.el-tag {
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background-color: rgba(0, 122, 255, 0.1);
+  color: #007aff;
+  border: none;
+}
+
+.el-tag:hover {
+  background-color: rgba(0, 122, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* iOS 26 风格弹窗样式 */
 .el-popover {
-  border-radius: 6px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ebeef5;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5ea;
+  background: white;
+  font-size: 13px;
+}
+
+/* 增强参数显示区域样式 */
+.el-popover .el-popover__content {
+  padding: 12px 16px;
+  max-width: 500px;
+  word-break: break-all;
 }
 </style>

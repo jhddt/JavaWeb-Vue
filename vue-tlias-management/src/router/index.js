@@ -11,7 +11,8 @@ import Login from '@/views/login/index.vue';
 import Layout from '@/views/layout/index.vue';
 
 const routes = [
-  { path: '/', 
+  {
+    path: '/',
     component: Layout,
     redirect: '/index',
     children: [
@@ -31,6 +32,25 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+// 添加路由守卫
+router.beforeEach((to, from, next) => {
+  // 不需要登录的页面直接通过
+  if (to.path === '/login') {
+    next();
+    return;
+  }
+
+  // 检查是否有登录信息
+  const loginUser = localStorage.getItem('loginUser');
+  if (loginUser) {
+    // 有登录信息，允许访问
+    next();
+  } else {
+    // 没有登录信息，重定向到登录页
+    next('/login');
+  }
 });
 
 export default router;

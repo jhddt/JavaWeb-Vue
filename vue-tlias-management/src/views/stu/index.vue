@@ -423,85 +423,108 @@ const openViolation = (id) => {
 
 
 <style scoped>
-/* 页面整体布局 */
+/* iOS 26 风格页面整体布局 */
 .page-container {
   min-height: 100%;
-  background-color: #f5f7fa;
-  padding: 20px;
+  background-color: #f5f5f7;
+  padding: 16px;
   animation: fadeIn 0.5s ease-in-out;
 }
 
-/* 标题样式 */
+/* iOS 26 风格标题样式 */
 h1 {
-  color: #409eff;
+  color: #1c1c1e;
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 24px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #e6f7ff;
-  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e5ea;
 }
 
-h1::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 80px;
-  height: 2px;
-  background: linear-gradient(90deg, #409eff, #67c23a);
-}
-
-/* 搜索表单样式 */
+/* iOS 26 风格搜索表单样式 */
 .search-form {
   background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   margin-bottom: 16px;
+  border: 1px solid #e5e5ea;
 }
 
-/* 按钮样式 */
+/* iOS 26 风格按钮样式 */
 .el-button {
-  border-radius: 6px;
+  border-radius: 12px;
   transition: all 0.3s ease;
+  height: 36px;
+  padding: 0 16px;
+}
+
+.el-button--primary {
+  background-color: #007aff;
+  border-color: #007aff;
+}
+
+.el-button--danger {
+  background-color: #ff3b30;
+  border-color: #ff3b30;
+}
+
+.el-button--success {
+  background-color: #34c759;
+  border-color: #34c759;
+}
+
+.el-button--warning {
+  background-color: #ff9500;
+  border-color: #ff9500;
+  color: white;
 }
 
 .el-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(64, 158, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.25);
+}
+
+.el-button--warning:hover {
+  background-color: #ff8c00;
+  border-color: #ff8c00;
+  color: white;
+  box-shadow: 0 2px 8px rgba(255, 149, 0, 0.25);
 }
 
 .el-button + .el-button {
   margin-left: 10px;
 }
 
-/* 表格样式 */
+/* iOS 26 风格表格样式 */
 .el-table {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e5ea;
 }
 
 .el-table thead {
-  background-color: #f8fafc;
+  background-color: #f2f2f7;
 }
 
 .el-table th {
-  font-weight: 600;
-  color: #606266;
-  background-color: #f8fafc !important;
-  border-bottom: 1px solid #e4e7ed !important;
+  font-weight: 500;
+  color: #1c1c1e;
+  background-color: #f2f2f7 !important;
+  border-bottom: 1px solid #e5e5ea !important;
+  height: 44px;
 }
 
 .el-table td {
-  color: #303133;
-  border-bottom: 1px solid #ebeef5 !important;
+  color: #1c1c1e;
+  border-bottom: 1px solid #f2f2f7 !important;
+  height: 40px;
 }
 
 .el-table tr:hover > td {
-  background-color: #f5f7fa !important;
+  background-color: #f2f2f7 !important;
 }
 
 .el-table__body-wrapper {
@@ -509,31 +532,35 @@ h1::after {
   overflow-y: auto;
 }
 
-/* 分页样式 */
+/* iOS 26 风格分页样式 */
 .pagination-container {
   background-color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   display: flex;
   justify-content: flex-end;
+  border: 1px solid #e5e5ea;
 }
 
-/* 对话框样式 */
+/* iOS 26 风格对话框样式 */
 .el-dialog {
-  border-radius: 8px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5ea;
+  background: white;
 }
 
 .el-dialog__header {
-  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-  color: white;
+  background: white;
+  color: #1c1c1e;
   padding: 16px 20px;
+  border-bottom: 1px solid #e5e5ea;
 }
 
 .el-dialog__title {
-  color: white;
+  color: #1c1c1e;
   font-size: 16px;
   font-weight: 600;
 }
@@ -546,16 +573,18 @@ h1::after {
 
 .el-dialog__footer {
   padding: 16px 20px;
-  background-color: #f8f9fa;
-  border-top: 1px solid #e9ecef;
+  background-color: #f9f9fa;
+  border-top: 1px solid #e5e5ea;
 }
 
-/* 表单样式增强 */
+/* iOS 26 风格表单样式增强 */
 .el-input,
 .el-select,
 .el-date-editor {
-  border-radius: 4px;
+  border-radius: 12px;
   transition: all 0.3s ease;
+  border: 1px solid #e5e5ea;
+  height: 40px;
 }
 
 .el-input:hover,
@@ -567,11 +596,11 @@ h1::after {
 .el-input:focus-within,
 .el-select:focus-within,
 .el-date-editor:focus-within {
-  border-color: #409eff;
-  box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
+  border-color: #007aff;
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
 }
 
-/* 动画效果 */
+/* iOS 26 风格动画效果 */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -583,7 +612,7 @@ h1::after {
   }
 }
 
-/* 响应式适配 */
+/* iOS 26 风格响应式适配 */
 @media (max-width: 1200px) {
   .page-container {
     padding: 16px;
@@ -617,10 +646,11 @@ h1::after {
   
   .search-form {
     padding: 12px;
+    border-radius: 10px;
   }
   
   .el-form-item {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   
   .el-table {
@@ -629,7 +659,8 @@ h1::after {
   
   .el-dialog {
     width: 95% !important;
-    margin: 5vh auto !important;
+    margin: 2vh auto !important;
+    border-radius: 14px;
   }
   
   .el-row {
@@ -639,25 +670,33 @@ h1::after {
   .el-col {
     width: 100% !important;
   }
+  
+  .el-button {
+    border-radius: 10px;
+    height: 34px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
 }
 
-/* 表单项样式 */
+/* iOS 26 风格表单项样式 */
 .el-form-item {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .el-form-item__label {
   font-weight: 500;
-  color: #606266;
+  color: #1c1c1e;
 }
 
-/* 选择框样式 */
+/* iOS 26 风格选择框样式 */
 .el-select-dropdown {
-  border-radius: 6px;
+  border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5ea;
 }
 
-/* 滚动条美化 */
+/* iOS 26 风格滚动条美化 */
 .el-table__body-wrapper::-webkit-scrollbar,
 .el-dialog__body::-webkit-scrollbar {
   width: 6px;
@@ -666,16 +705,17 @@ h1::after {
 
 .el-table__body-wrapper::-webkit-scrollbar-thumb,
 .el-dialog__body::-webkit-scrollbar-thumb {
-  background-color: #dcdfe6;
+  background-color: #c7c7cc;
   border-radius: 3px;
 }
 
 .el-table__body-wrapper::-webkit-scrollbar-track,
 .el-dialog__body::-webkit-scrollbar-track {
-  background-color: #f0f2f5;
+  background-color: #f2f2f7;
+  border-radius: 3px;
 }
 
-/* 特殊样式 */
+/* iOS 26 风格特殊样式 */
 .el-table-column--selection .cell {
   padding: 0 !important;
 }
@@ -684,20 +724,28 @@ h1::after {
   margin: 0 auto;
 }
 
-/* 违纪扣分样式 */
+/* iOS 26 风格违纪扣分样式 */
 .el-table td .el-tag {
   margin-right: 0;
+  border-radius: 10px;
+  padding: 2px 8px;
 }
 
-.el-button--warning {
-  background-color: #ff9800;
-  border-color: #ff9800;
+/* iOS 26 风格分页按钮样式 */
+.el-pagination.is-background .el-pager li:not(.disabled):hover {
+  color: #007aff;
+  background-color: #f2f2f7;
+}
+
+.el-pagination.is-background .el-pager li.is-active {
+  background-color: #007aff;
   color: white;
 }
 
-.el-button--warning:hover {
-  background-color: #f57c00;
-  border-color: #f57c00;
-  color: white;
+/* iOS 26 风格对话框底部样式 */
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 </style>
