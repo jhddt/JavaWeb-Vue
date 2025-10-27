@@ -14,7 +14,21 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
-app.use(ElementPlus, {locale: zhCn})
+app.use(ElementPlus, {
+  locale: zhCn,
+  // 全局配置消息提示位置为右下角
+  message: {
+    position: 'bottom-right',
+    showClose: true,
+    duration: 3000,
+  },
+  // 全局配置通知位置为右下角
+  notification: {
+    position: 'bottom-right',
+    showClose: true,
+    duration: 4500,
+  }
+})
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }

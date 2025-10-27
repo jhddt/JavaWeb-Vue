@@ -135,74 +135,134 @@ onUnmounted(() => {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f5f5f7;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
   background-image: 
-    radial-gradient(circle at 20% 30%, rgba(0, 122, 255, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(52, 199, 89, 0.05) 0%, transparent 40%);
+    radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+  position: relative;
+  overflow: hidden;
 }
 
-/* 桌面端优化的顶部导航栏样式 */
+.common-layout::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%),
+    linear-gradient(-45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 现代化顶部导航栏样式 */
 .header {
-  height: 60px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 0 32px;
   z-index: 100;
   position: relative;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .title {
-  color: #1c1c1e;
-  font-size: 22px;
-  font-weight: 700;
+  color: #1e293b;
+  font-size: 24px;
+  font-weight: 800;
   letter-spacing: -0.5px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
 }
 
 .title::before {
   content: '';
   display: inline-block;
-  width: 32px;
-  height: 32px;
-  background: url(../../assets/logo.png) no-repeat center;
-  background-size: contain;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 12px;
+  background-image: url(../../assets/logo.png);
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 桌面端优化的右侧工具栏 */
+.title:hover::before {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+/* 现代化右侧工具栏 */
 .right_tool {
   display: flex;
-  gap: 12px;
-  color: #1c1c1e;
+  gap: 16px;
+  color: #1e293b;
 }
 
 .right_tool a {
-  color: #007aff;
+  color: #6366f1;
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: 12px;
-  transition: all 0.2s ease;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 14px;
-  background-color: #f2f2f7;
-  font-weight: 500;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  font-weight: 600;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.right_tool a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.right_tool a:hover::before {
+  left: 100%;
 }
 
 .right_tool a:hover {
-  background-color: #e5e5ea;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+  border-color: transparent;
 }
 
 .right_tool .el-icon {
-  font-size: 16px;
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.right_tool a:hover .el-icon {
+  transform: scale(1.1);
 }
 
 /* 桌面端优化的主体容器 */
@@ -213,80 +273,129 @@ onUnmounted(() => {
   overflow: hidden;
 }
 
-/* 桌面端优化的侧边栏样式 */
+/* 现代化侧边栏样式 */
 .aside {
-  width: 240px;
-  background-color: #ffffff;
-  border-right: 1px solid #e5e5ea;
+  width: 260px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
   overflow-y: auto;
-  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
   flex-shrink: 0;
+  position: relative;
 }
 
-/* 桌面端优化的菜单样式增强 */
+.aside::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.3), transparent);
+}
+
+/* 现代化菜单样式系统 */
 .el-menu {
   border-right: none;
   height: 100%;
   background: transparent;
-  padding: 16px 0;
+  padding: 20px 0;
 }
 
 .el-menu-item,
 .el-sub-menu__title {
-  height: 48px;
-  line-height: 48px;
-  padding: 0 20px;
+  height: 52px;
+  line-height: 52px;
+  padding: 0 24px;
   font-size: 15px;
-  transition: all 0.2s ease;
-  border-radius: 0 12px 12px 0;
-  margin: 2px 0;
-  color: #1c1c1e;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0 16px 16px 0;
+  margin: 4px 0;
+  color: #374151;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+}
+
+.el-menu-item::before,
+.el-sub-menu__title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+  border-radius: 0 2px 2px 0;
 }
 
 .el-menu-item:hover,
 .el-sub-menu__title:hover {
-  background-color: #f2f2f7 !important;
-  color: #007aff !important;
-  padding-left: 22px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%) !important;
+  color: #6366f1 !important;
+  padding-left: 28px;
+  transform: translateX(4px);
+}
+
+.el-menu-item:hover::before,
+.el-sub-menu__title:hover::before {
+  transform: scaleY(1);
 }
 
 .el-menu-item.is-active {
-  background-color: rgba(0, 122, 255, 0.1) !important;
-  color: #007aff !important;
-  font-weight: 600 !important;
-  border-right: 3px solid #007aff;
-  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.15);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%) !important;
+  color: #6366f1 !important;
+  font-weight: 700 !important;
+  border-right: 4px solid #6366f1;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+  transform: translateX(4px);
+}
+
+.el-menu-item.is-active::before {
+  transform: scaleY(1);
 }
 
 .el-menu-item .el-icon,
 .el-sub-menu__title .el-icon {
-  font-size: 18px;
-  margin-right: 12px;
-  color: #8e8e93;
+  font-size: 20px;
+  margin-right: 16px;
+  color: #9ca3af;
+  transition: all 0.3s ease;
 }
 
 .el-menu-item.is-active .el-icon,
 .el-sub-menu__title:hover .el-icon {
-  color: #007aff;
+  color: #6366f1;
+  transform: scale(1.1);
 }
 
 .el-sub-menu .el-menu {
-  background-color: rgba(249, 249, 250, 0.8);
+  background: linear-gradient(135deg, rgba(249, 250, 251, 0.8) 0%, rgba(243, 244, 246, 0.8) 100%);
   padding: 0;
+  border-radius: 0 16px 16px 0;
+  margin: 4px 0;
 }
 
 .el-sub-menu .el-menu-item {
-  padding-left: 52px;
+  padding-left: 60px;
+  font-size: 14px;
+  height: 44px;
+  line-height: 44px;
 }
 
-/* 桌面端优化的主内容区域 */
+/* 现代化主内容区域 */
 .el-main {
-  padding: 24px;
-  background-color: #f5f5f7;
+  padding: 32px;
+  background: transparent;
   overflow-y: auto;
   flex: 1;
   max-width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 /* 移除移动端响应式样式 */
@@ -318,10 +427,12 @@ onUnmounted(() => {
   }
 }
 
-/* 滚动时增强毛玻璃效果的JavaScript钩子 */
+/* 现代化滚动毛玻璃效果 */
 .scrolled-blur {
-  backdrop-filter: blur(24px) !important;
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(30px) !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px) !important;
 }
 </style>

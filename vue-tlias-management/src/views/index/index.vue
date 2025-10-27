@@ -5,6 +5,7 @@ import { queryEmpJobDataApi, queryEmpGenderDataApi } from '@/api/report'
 import { queryStudentCountDataApi, queryStudentDegreeDataApi } from '@/api/report'
 import { queryPageApi } from '@/api/log'
 import { queryAllApi as queryAllClazzApi } from '@/api/clazz'
+import { ElMessage, ElNotification } from 'element-plus'
 
 // 日志数据
 let logData = ref([])
@@ -35,6 +36,53 @@ const formatNumber = (num) => {
     return (num / 10000).toFixed(1) + '万'
   }
   return num.toString()
+}
+
+// 测试消息提示效果
+const testMessage = (type) => {
+  const messages = {
+    success: '操作成功！数据已保存',
+    warning: '请注意：此操作不可撤销',
+    error: '操作失败！请检查网络连接',
+    info: '提示：系统将在5分钟后维护'
+  }
+  
+  ElMessage({
+    type: type,
+    message: messages[type],
+    showClose: true,
+    duration: 3000
+  })
+}
+
+// 测试通知效果
+const testNotification = (type) => {
+  const notifications = {
+    success: {
+      title: '操作成功',
+      message: '您的数据已成功保存到服务器，所有更改已生效。'
+    },
+    warning: {
+      title: '系统警告',
+      message: '检测到异常操作，请确认您的操作是否正确。'
+    },
+    error: {
+      title: '操作失败',
+      message: '网络连接异常，请检查您的网络设置后重试。'
+    },
+    info: {
+      title: '系统通知',
+      message: '系统将在今晚22:00-24:00进行维护升级，请提前保存工作。'
+    }
+  }
+  
+  ElNotification({
+    type: type,
+    title: notifications[type].title,
+    message: notifications[type].message,
+    showClose: true,
+    duration: 4500
+  })
 }
 
 // 钩子函数 - 加载所有统计数据
@@ -448,6 +496,28 @@ const handleCurrentChange = (page) => {
       <p class="subtitle">实时监控系统核心指标与数据分析</p>
     </div>
     
+    <!-- 消息提示测试区域 -->
+    <div class="test-message-area">
+      <div class="test-section">
+        <h3>消息提示测试</h3>
+        <div class="test-buttons">
+          <el-button type="success" @click="testMessage('success')">成功消息</el-button>
+          <el-button type="warning" @click="testMessage('warning')">警告消息</el-button>
+          <el-button type="danger" @click="testMessage('error')">错误消息</el-button>
+          <el-button type="info" @click="testMessage('info')">信息消息</el-button>
+        </div>
+      </div>
+      <div class="test-section">
+        <h3>通知测试</h3>
+        <div class="test-buttons">
+          <el-button type="success" @click="testNotification('success')">成功通知</el-button>
+          <el-button type="warning" @click="testNotification('warning')">警告通知</el-button>
+          <el-button type="danger" @click="testNotification('error')">错误通知</el-button>
+          <el-button type="info" @click="testNotification('info')">信息通知</el-button>
+        </div>
+      </div>
+    </div>
+    
     <!-- 关键指标卡片 -->
     <div class="metrics-container">
       <div class="metric-card" :class="{ 'primary': true }">
@@ -608,6 +678,57 @@ const handleCurrentChange = (page) => {
   font-size: 14px;
   margin: 0;
   font-weight: 400;
+}
+
+/* 消息提示测试区域样式 */
+.test-message-area {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 40px;
+  padding: 24px;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(255, 255, 255, 0.8) 100%);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--gray-200);
+  backdrop-filter: blur(20px);
+  animation: slideUp 0.4s ease 0.1s both;
+}
+
+.test-section {
+  flex: 1;
+  text-align: center;
+}
+
+.test-section h3 {
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.test-section h3::before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  border-radius: var(--radius-sm);
+}
+
+.test-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.test-buttons .el-button {
+  min-width: 100px;
+  font-size: 13px;
+  padding: 8px 16px;
 }
 
 /* 关键指标卡片容器 */
